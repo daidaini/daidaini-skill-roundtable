@@ -24,7 +24,7 @@ Assistant: [Launches roundtable discussion on free will]
 为了执行本项技能，请严格按照以下步骤操作：
 
 1. **读取参考资料**
-   读取 `~/.claude/skills/ljg-roundtable/references/original-prompt.org` 了解原始框架设计意图。
+   读取 `~/.agents/skills/ljg-roundtable/references/original-prompt.org` 了解原始框架设计意图。
 
 2. **解析议题**
    从用户输入中提取核心议题。如果用户只说"圆桌讨论"未给议题，询问议题。
@@ -32,7 +32,7 @@ Assistant: [Launches roundtable discussion on free will]
 3. **选人：提议代表人物**
    根据议题，选择 3-5 位**真实历史/当代人物**作为代表，覆盖尽可能多的立场维度。每位人物需要：
    - 姓名（真实人物，非虚构）
-   - MBTI 人格类型
+   - 人物小传（3句话之内概括描述该人物简介）
    - 核心立场（一句话）
    - 选择理由（为什么此人对此议题有独特视角）
 
@@ -71,7 +71,7 @@ Assistant: [Launches roundtable discussion on free will]
    ASCII 图的设计原则：
    - 高度概括本轮讨论的**结构**，不是复述内容
    - 标出正/负反馈环、因果链、张力维度
-   - 形式不固定：可以是 2x2 矩阵、光谱轴、因果环路、层级树——哪种最见骨用哪种
+   - 形式不固定：可以是 2x2 矩阵、光谱轴、因果环路、层级树——哪种最见骨，用哪种
 
    **5c. 用户指令**
    综述后展示指令菜单：
@@ -92,22 +92,19 @@ Assistant: [Launches roundtable discussion on free will]
    - 列出**未解决的开放问题**（讨论中暴露但未穷尽的方向）
 
 7. **写入 org 文件**
-   将讨论全貌整合为 org-mode 格式并写入文件：
+   将讨论全貌整合为 markdown 格式并写入文件：
    1. 运行 `date +%Y%m%dT%H%M%S` 获取时间戳
-   2. 写入 `~/Documents/notes/{timestamp}--圆桌-{议题关键词}__roundtable.org`
-   3. org 文件结构：
-      ```org
-      #+title: 圆桌：{议题}
-      #+date: [{日期}]
-      #+filetags: :roundtable:
-      * 议题与参会者
-      * 各轮讨论记录
-      ** 第 N 轮：{引导问题}
-      *** 发言记录
-      *** 核心争议
-      *** ASCII 框架图
-      * 知识网络（全局）
-      * 开放问题
+   2. 写入 `./{timestamp}--圆桌-{议题关键词}__roundtable.org`
+   3. 文件内容需要包括：
+      ```
+      议题与参会者
+      各轮讨论记录
+      第 N 轮：{引导问题}
+      发言记录
+      核心争议
+      ASCII 框架图
+      知识网络（全局）
+      开放问题
       ```
    4. 向用户报告文件路径
 
@@ -121,6 +118,6 @@ Assistant: [Launches roundtable discussion on free will]
 ### 参会者行为准则
 
 - 必须**忠于其真实思想体系**发言，不是泛泛而谈
-- 引用/化用其**经典著作或知名观点**
+- 引用或者化用其**经典著作或知名观点**
 - 发言有锋芒：质疑要见骨，补充要推进，不说正确的废话
 - 每段结尾 `**简言之**` 一句话压到极致
